@@ -9,16 +9,11 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import Dapp from "./Dapp"
 import './App.css';
+import { wagmiConfig } from './config';
 
 const theChains = [bscTestnet];
 const projectId = "your-walletconnect-project-id";
 
-const wagmiConfig = createConfig({
-  chains: [bscTestnet],
-  transports: {
-    [bscTestnet.id]: http(),
-  },
-});
 const ethereumClient = new EthereumClient(wagmiConfig, theChains);
 
 function App() {
