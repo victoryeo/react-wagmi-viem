@@ -6,7 +6,7 @@ import {
   waitForTransactionReceipt,
   writeContract,
 } from "@wagmi/core";
-import { greeter_abi } from "./greeter_abi.json";
+import greeter_abi from "./greeter_abi.json";
 import { wagmiConfig } from './config';
 
 const Dapp = () => {
@@ -17,7 +17,7 @@ const Dapp = () => {
 
   const { data: currentGreet = "", refetch: reFetchGreeter }: any =
     useReadContract({
-      abi: greeter_abi,
+      abi: greeter_abi.greeter_abi,
       address: "0xd24FcAedcc75dF6d9AE8581B9836e9781AE89fE8",
       functionName: "greet",
     });
@@ -27,7 +27,7 @@ const Dapp = () => {
       //prepare transaction
       const { request } = await simulateContract(wagmiConfig,{
         address: "0xd24FcAedcc75dF6d9AE8581B9836e9781AE89fE8",
-        abi: greeter_abi,
+        abi: greeter_abi.greeter_abi,
         functionName: "setGreeting",
         args: [greeter],
       });
@@ -51,6 +51,16 @@ const Dapp = () => {
       <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
         {isConnected ? address : "Connect to wallet"}
       </button>
+      <div>Current greet is {currentGreet}</div>
+
+      <div>
+        <input
+          type="text"
+          value={greeter}
+          onChange={(e) => setGreeter(e.target.value)}
+        />
+        <button onClick={updateGreet}>Update greet</button>
+      </div>
     </div>
   );
 };
