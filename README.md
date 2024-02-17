@@ -1,5 +1,5 @@
 Example code using Wagmi Viem Web3Modal
 
-nodejs 16
+nodejs 18
 
 npm i --legacy-peer-deps
