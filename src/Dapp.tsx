@@ -5,6 +5,7 @@ import {
   waitForTransactionReceipt,
   writeContract,
 } from "@wagmi/core";
+import { useWeb3Modal } from '@web3modal/wagmi/react'
 import greeter_abi from "./greeter_abi.json";
 import { wagmiConfig } from './config';
 
@@ -12,6 +13,7 @@ const Dapp = () => {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const [greeter, setGreeter] = useState("");
+  const { open } = useWeb3Modal()
 
   const { data: currentGreet = "", refetch: reFetchGreeter }: any =
     useReadContract({
@@ -46,6 +48,9 @@ const Dapp = () => {
 
   return (
     <>
+      <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
+        {isConnected ? address : "Connect to wallet"}
+      </button>
       <div>Current greet is {currentGreet}</div>
 
       <div>
