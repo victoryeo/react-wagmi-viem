@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useWeb3Modal } from "@web3modal/react";
 import { useAccount, useDisconnect, useReadContract } from "wagmi";
 import {
   simulateContract,
@@ -10,7 +9,6 @@ import greeter_abi from "./greeter_abi.json";
 import { wagmiConfig } from './config';
 
 const Dapp = () => {
-  const { open } = useWeb3Modal();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const [greeter, setGreeter] = useState("");
@@ -47,10 +45,7 @@ const Dapp = () => {
   };
 
   return (
-    <div>
-      <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
-        {isConnected ? address : "Connect to wallet"}
-      </button>
+    <>
       <div>Current greet is {currentGreet}</div>
 
       <div>
@@ -61,7 +56,7 @@ const Dapp = () => {
         />
         <button onClick={updateGreet}>Update greet</button>
       </div>
-    </div>
+    </>
   );
 };
 
