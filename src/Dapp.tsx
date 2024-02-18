@@ -48,19 +48,35 @@ const Dapp = () => {
 
   return (
     <>
-      <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
+      <table>
+      <tr>
+        <th>Address&nbsp;</th>
+        <th>
+        <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
         {isConnected ? address : "Connect to wallet"}
-      </button>
-      <div>Current greet is {currentGreet}</div>
-
-      <div>
+        </button>
+        </th>
+      </tr>
+      </table>
+      <hr/>
+      <table>
+      <tr>
+      <th>Interaction with smart contract</th>
+      </tr>
+      <tr>
+      <td>Current greeting is {currentGreet}</td>
+      </tr >
+      <tr>
+      <td>
         <input
           type="text"
           value={greeter}
           onChange={(e) => setGreeter(e.target.value)}
-        />
-        <button onClick={updateGreet}>Update greet</button>
-      </div>
+        />&nbsp;
+        <button onClick={updateGreet}>Update greeting</button>
+      </td>
+      </tr >
+      </table>
     </>
   );
 };
