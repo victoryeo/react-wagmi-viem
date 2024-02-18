@@ -11,7 +11,6 @@ export const wagmiConfig = createConfig({
   },
   connectors: [
     injected(), 
-    metaMask(),
     walletConnect({
       projectId: '3fcc6bba6f1de962d911bb5b5c3dba68',
     }),
