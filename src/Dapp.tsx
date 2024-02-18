@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useAccount, useDisconnect, useReadContract } from "wagmi";
+import { useAccount, useConnect, useDisconnect, useReadContract } from "wagmi";
+import { injected } from 'wagmi/connectors'
 import {
   simulateContract,
   waitForTransactionReceipt,
@@ -12,8 +13,8 @@ import { wagmiConfig } from './config';
 const Dapp = () => {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const { connect } = useConnect()
   const [greeter, setGreeter] = useState("");
-  const { open } = useWeb3Modal()
 
   const { data: currentGreet = "", refetch: reFetchGreeter }: any =
     useReadContract({
@@ -52,7 +53,7 @@ const Dapp = () => {
       <tr>
         <th>Address&nbsp;</th>
         <th>
-        <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect : open}>
+            <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => isConnected ? disconnect() : connect({ connector: injected() })}>
         {isConnected ? address : "Connect to wallet"}
         </button>
         </th>
