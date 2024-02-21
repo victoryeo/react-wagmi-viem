@@ -4,4 +4,4 @@ nodejs 18
 
 npm i --legacy-peer-deps
 
-Use react-app-rewired
+Use react-app-rewired to work with React 18
